@@ -69,8 +69,7 @@ export class RepoItemDetailsComponent implements OnInit {
   }
 
   update(event, value) {
-    const description = this.repoDetails.description;
-    if (event && event.key === "Enter" && description !== value) {
+    if (event && event.key === "Enter" && this.description !== value) {
       this.githubService.updateDescription(
         value,
         this.repoDetails.owner.login,
