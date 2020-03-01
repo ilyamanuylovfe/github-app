@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { GithubService } from "src/app/services/github.service";
 import { StorageMap } from "@ngx-pwa/local-storage";
 import { IRepository } from "src/app/model/repository.model";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-repo-list",
@@ -11,11 +12,13 @@ import { IRepository } from "src/app/model/repository.model";
 export class RepoListComponent implements OnInit {
   constructor(
     private githubService: GithubService,
-    private localStorage: StorageMap
+    private localStorage: StorageMap,
+    private router: Router
   ) {}
 
   usersRepos: Array<IRepository>;
   activeFilter = "name";
+
   ngOnInit(): void {
     this.usersRepos = this.githubService.getUsersRepos();
     this.sortByName();
@@ -55,7 +58,9 @@ export class RepoListComponent implements OnInit {
           this.localStorage.set(repo.name, repo).subscribe(() => {});
           this.githubService.fetchTags(repo.tags_url, repo.name);
           this.githubService.fetchReadme(repo.owner.login, repo.name);
+          this.router.navigate([`/${repo.name}`]);
         } else {
+          this.router.navigate([`/${repo.name}`]);
           return;
         }
       }

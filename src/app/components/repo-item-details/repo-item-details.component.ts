@@ -33,6 +33,7 @@ export class RepoItemDetailsComponent implements OnInit {
   isDataLoaded: boolean;
   @ViewChild("descriptionInput", { static: false })
   descriptionInput: ElementRef;
+
   ngOnInit() {
     this.path = window.location.pathname.substr(1);
     this.localStorage.get(`${this.path}/tags`).subscribe(tags => {
@@ -42,7 +43,6 @@ export class RepoItemDetailsComponent implements OnInit {
     this.localStorage.get(`${this.path}/readme`).subscribe(readme => {
       this.readme = readme;
     });
-
     this.localStorage.get(this.path).subscribe((repo: IRepository) => {
       this.repoDetails = repo;
       this.description = this.repoDetails.description;
