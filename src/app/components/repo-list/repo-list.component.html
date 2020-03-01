@@ -1,0 +1,35 @@
+<div class="list-wrapper">
+  <p class="owner">Owner</p>
+  <p class="repository-name">Repository name</p>
+  <p class="repository-description">Repository description</p>
+  <p class="last-update">Last update</p>
+  <p class="stars">Stars</p>
+  <div class="dropdown-wrapper">
+    <div (click)="sortByDate()" class="button">Sort by</div>
+    <div class="dropdown-options">
+      <p
+        class="dropdown-option"
+        [ngClass]="{ active: activeFilter === 'name' }"
+        (click)="sortBy('name')"
+      >
+        By repository name
+      </p>
+      <p
+        class="dropdown-option"
+        [ngClass]="{ active: activeFilter === 'date' }"
+        (click)="sortBy('date')"
+      >
+        By last update date
+      </p>
+    </div>
+  </div>
+</div>
+<div class="repos-list">
+  <ng-container *ngFor="let repo of usersRepos">
+    <app-repo-list-item
+      (click)="setDetails(repo)"
+      [repository]="repo"
+      routerLink="{{ repo.name }}"
+    ></app-repo-list-item>
+  </ng-container>
+</div>

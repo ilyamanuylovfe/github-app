@@ -1,0 +1,56 @@
+.list-wrapper
+    display: flex
+    align-items: center
+    margin: 2rem 1rem
+    p
+        font-weight: bold
+        &.owner
+            max-width: 18rem
+            width: 100%
+            padding-left: 1rem
+        &.repository-name
+            max-width: 20rem
+            width: 100%
+        &.repository-description
+            max-width: 44rem
+            width: 100%
+        &.last-update
+            max-width: 20rem
+            width: 100%
+    .dropdown-wrapper
+        position: relative
+        margin-left: 2rem
+        &:hover
+            .dropdown-options
+                display: block
+        .dropdown-trigger
+            box-sizing: border-box
+            width: 16rem
+            padding: 1rem 0
+            border: .1rem solid #8189a9
+            background-color: #f9f9f9
+            text-align: center
+            cursor: pointer
+        .dropdown-options
+            position: absolute
+            width: 16rem
+            display: none
+            background-color: #f9f9f9
+            .dropdown-option
+                padding: 1rem .5rem
+                font-size: 1.4rem
+                color: #2f3542
+                &:hover
+                    cursor: pointer
+                    background-color: #c1c0c3
+                &.active
+                    background-color: #a6adc9
+.repos-list
+    margin: 2rem auto
+    max-width: calc( 100% - 2rem )
+    width: 100%
+
+@media (max-width: 1200px)
+    .list-wrapper
+        p.repository-description
+            width: 20rem

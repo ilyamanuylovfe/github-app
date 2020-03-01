@@ -1,0 +1,79 @@
+\:host
+    display: block
+    margin: 2rem
+    position: relative
+    .repo-info
+        display: flex
+        align-items: center
+        .repo
+            font-size: 1.8rem
+            font-weight: bold
+            user-select: none
+        .repo-download-btn
+            margin-left: 2rem
+            outline: none
+    .section-block
+        margin-top: 2rem
+        .section-label
+            font-size: 1.8rem
+            font-weight: bold
+            user-select: none
+        .description-wrapper
+            position: relative
+            display: flex
+            align-items: baseline
+            min-width: .1rem
+            transition: min-width 0.2s ease, all .5s ease
+            max-width: calc(100% - 2rem)
+            overflow-y: hidden
+            transform: translateY(.3rem)
+            .description-text, .description-input
+                font-size: 1.8rem
+                font-weight: 300
+                line-height: 2.2rem
+                letter-spacing: 0.45px
+            .description-text
+                position: relative
+                z-index: 1
+                white-space: nowrap
+                height: 3rem
+                overflow: hidden
+                text-overflow: ellipsis
+            .description-input
+                position: absolute
+                left: 0
+                top: -.1rem
+                z-index: 2
+                background: transparent
+                width: 60rem
+                border: 0
+                opacity: 0
+                padding-bottom: .4rem
+                box-sizing: border-box
+                transform: translateX(-.1rem)
+                cursor: text
+        .description-wrapper-edit
+            min-width: 36.5rem
+            .description-text
+                opacity: 0
+            .description-input
+                z-index: 3
+                opacity: 1
+                outline: none
+                border-bottom: .1rem solid #8891ae
+        .tags, .readme
+            width: max-content
+            cursor: pointer
+            .opened
+                transform: rotate(90deg)
+        .no-data
+            margin-top: 1rem
+        .label-title
+            padding-right: .5rem
+    .editing-overflow
+        position: fixed
+        width: 100vw
+        height: 100vh
+        z-index: 90
+        left: 0
+        top: 0

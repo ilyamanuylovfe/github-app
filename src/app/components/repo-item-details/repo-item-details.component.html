@@ -1,0 +1,82 @@
+<ng-container *ngIf="isDataLoaded">
+  <div class="repo-info">
+    <p class="repo">{{ repoDetails.name }}</p>
+    <button
+      (click)="downloadZip(repoDetails.owner.login, repoDetails.name)"
+      class="button repo-download-btn"
+    >
+      Download zip
+    </button>
+  </div>
+  <div class="section-block">
+    <p class="section-label">Description</p>
+    <ng-container *ngIf="repoDetails.description; else noData">
+      <div
+        class="description-wrapper"
+        (click)="toggleEditing()"
+        [ngClass]="{ 'description-wrapper-edit': isEditing }"
+      >
+        <p class="description-text">
+          {{ repoDetails.description }}
+        </p>
+        <input
+          #descriptionInput
+          class="description-input"
+          value="{{
+            repoDetails.description ? repoDetails.description : 'No description'
+          }}"
+          (keyup)="update($event, descriptionInput.value)"
+        />
+      </div>
+    </ng-container>
+    <ng-template #noData>
+      <p class="description-text">
+        No description
+      </p>
+    </ng-template>
+  </div>
+  <div class="section-block">
+    <p class="section-label tags" (click)="toggleTags()">
+      <span class="label-title">Tags</span>
+      <img
+        class="tags-toggler"
+        src="../../../assets/chevron-right.svg"
+        alt="Toggle"
+        [ngClass]="{ opened: showTags }"
+      />
+    </p>
+    <ng-container *ngIf="showTags">
+      <ng-container *ngIf="tags && tags.length > 0; else noTags">
+        <ng-container *ngFor="let tag of tags">
+          <p>Name: {{ tag.name }}</p>
+          <p>Commit url: {{ tag.commit.url }}</p>
+        </ng-container>
+      </ng-container>
+      <ng-template #noTags>
+        <p class="no-data">No tags</p>
+      </ng-template>
+    </ng-container>
+  </div>
+  <div class="section-block">
+    <p class="section-label readme" (click)="toggleReadme()">
+      <span class="label-title">README.md</span>
+      <img
+        class="tags-toggler"
+        src="../../../assets/chevron-right.svg"
+        alt="Toggle"
+        [ngClass]="{ opened: showReadme }"
+      />
+    </p>
+    <ng-container *ngIf="readme; else noReadme">
+      <div [innerHTML]="readme | sanitizeHtml" *ngIf="showReadme"></div>
+    </ng-container>
+    <ng-template #noReadme>
+      <p class="no-data" *ngIf="showReadme">No README.md</p>
+    </ng-template>
+  </div>
+  <div
+    class="editing-overflow"
+    *ngIf="isEditing"
+    (click)="toggleEditing()"
+  ></div>
+</ng-container>

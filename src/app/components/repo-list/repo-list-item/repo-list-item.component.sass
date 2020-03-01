@@ -1,0 +1,46 @@
+\:host
+    display: flex
+    align-items: center
+    margin-top: 2rem
+    border: .1rem solid #dcdeee
+    padding: 1rem
+    transition: .3s
+    &:hover
+        cursor: pointer
+        background-color: #f7f8ff
+    p
+        padding: 0 1rem
+    .repository-item-user-avatar
+        width: 2.4rem
+        height: 2.4rem
+    .username
+        font-weight: bold
+    .repo-name
+        max-width: 20rem
+        width: 100%
+    .description
+        max-width: 44rem
+        width: 100%
+    .empty
+        font-style: italic
+    .repository-time
+        max-width: 20rem
+        width: 100%
+    .star-wrapper
+        display: flex
+        align-items: flex-end
+    .star-amount
+        padding-left: .5rem
+
+@media (max-width: 1200px)
+    \:host
+        .reponame
+            max-width: 20rem
+        .description
+            max-width: 20rem
+            overflow: hidden
+            white-space: nowrap
+            text-overflow: ellipsis
+
+
+    

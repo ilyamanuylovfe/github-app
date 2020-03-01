@@ -1,0 +1,14 @@
+<img
+  src="{{ repository.owner.avatar_url }}"
+  class="repository-item-user-avatar"
+/>
+<p class="username">{{ repository.owner.login }}</p>
+<p class="repo-name">{{ repository.name }}</p>
+<p class="description" [ngClass]="{ empty: !repository.description }">
+  {{ repository.description ? repository.description : "No description" }}
+</p>
+<p class="repository-time">{{ repository.updated_at | formatTime }}</p>
+<p class="star-wrapper">
+  <img src="../../../../assets/star.svg" alt="Star" />
+  <span class="star-amount">{{ repository.stargazers_count }}</span>
+</p>
