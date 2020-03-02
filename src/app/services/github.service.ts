@@ -59,10 +59,18 @@ export class GithubService {
   }
 
   updateDescription(value, owner, repo) {
+    let headers = new HttpHeaders({
+      Authorization: `token 1f0b2582f70842a187661c4216b43aae5dc4893f`
+    });
+
     return this.http
-      .patch(`${GITHUB_API}repos/${owner}/${repo}`, {
-        description: value
-      })
+      .patch(
+        `${GITHUB_API}repos/${owner}/${repo}`,
+        {
+          description: value
+        },
+        { headers }
+      )
       .subscribe(res => console.log(res));
   } // This API doesn't work
 }

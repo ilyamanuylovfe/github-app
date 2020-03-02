@@ -18,6 +18,7 @@ export class RepoListComponent implements OnInit {
 
   usersRepos: Array<IRepository>;
   activeFilter = "name";
+  filterBy: string;
 
   ngOnInit(): void {
     this.usersRepos = this.githubService.getUsersRepos();

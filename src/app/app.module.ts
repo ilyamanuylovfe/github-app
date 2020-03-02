@@ -9,6 +9,7 @@ import { RepoListItemComponent } from "./components/repo-list/repo-list-item/rep
 import { PipesModule } from "./pipes/pipes.module";
 import { RepoItemDetailsComponent } from "./components/repo-item-details/repo-item-details.component";
 import { GithubService } from "./services/github.service";
+import { FormsModule } from "@angular/forms";
 
 export function usersProvider(provider) {
   return () => provider.fetchUser();
@@ -21,7 +22,13 @@ export function usersProvider(provider) {
     RepoListItemComponent,
     RepoItemDetailsComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, PipesModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    PipesModule,
+    FormsModule
+  ],
   providers: [
     GithubService,
     {

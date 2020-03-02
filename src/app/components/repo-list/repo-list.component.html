@@ -1,3 +1,9 @@
+<input
+  type="text"
+  placeholder="Search"
+  class="search-input"
+  [(ngModel)]="filterBy"
+/>
 <div class="list-wrapper">
   <p class="owner">Owner</p>
   <p class="repository-name">Repository name</p>
@@ -25,7 +31,7 @@
   </div>
 </div>
 <div class="repos-list">
-  <ng-container *ngFor="let repo of usersRepos">
+  <ng-container *ngFor="let repo of usersRepos | reposFilter: filterBy:'name'">
     <app-repo-list-item
       (click)="setDetails(repo)"
       [repository]="repo"
