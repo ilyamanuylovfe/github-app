@@ -59,8 +59,9 @@ export class GithubService {
   }
 
   updateDescription(value, owner, repo) {
+    const token = "23b7648c29cb5b58af4d16e710054fd2ea1fd230";
     let headers = new HttpHeaders({
-      Authorization: `token c64a7a5c03b2ce1b11b14298e9003fd477f1330a`
+      Authorization: `token ${token}`
     });
 
     return this.http
