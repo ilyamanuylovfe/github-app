@@ -31,7 +31,7 @@
   </div>
 </div>
 <div class="repos-list">
-  <ng-container *ngFor="let repo of usersRepos | reposFilter: filterBy:'name'">
+  <ng-container *ngFor="let repo of usersRepos">
     <app-repo-list-item
       (click)="setDetails(repo)"
       [repository]="repo"

@@ -45,9 +45,9 @@ export class RepoListComponent implements OnInit {
   sortByDate() {
     this.usersRepos.sort((repoA, repoB) => {
       return repoA.updated_at < repoB.updated_at
-        ? -1
-        : repoA.updated_at > repoB.updated_at
         ? 1
+        : repoA.updated_at > repoB.updated_at
+        ? -1
         : 0;
     });
   }
