@@ -3,9 +3,10 @@ import {
   OnInit,
   HostListener,
   ElementRef,
-  ViewChild
+  ViewChild,
+  OnDestroy
 } from "@angular/core";
-import { Observable } from "rxjs";
+import { Observable, Subscription } from "rxjs";
 import { GithubService } from "src/app/services/github.service";
 import { StorageMap } from "@ngx-pwa/local-storage";
 import { IRepository } from "src/app/model/repository.model";
@@ -15,7 +16,7 @@ import { IRepository } from "src/app/model/repository.model";
   templateUrl: "./repo-item-details.component.html",
   styleUrls: ["./repo-item-details.component.sass"]
 })
-export class RepoItemDetailsComponent implements OnInit {
+export class RepoItemDetailsComponent implements OnInit, OnDestroy {
   constructor(
     private githubService: GithubService,
     private localStorage: StorageMap
@@ -33,21 +34,30 @@ export class RepoItemDetailsComponent implements OnInit {
   isDataLoaded: boolean;
   @ViewChild("descriptionInput", { static: false })
   descriptionInput: ElementRef;
+  repoSubscription: Subscription;
+  readMeSubscription: Subscription;
+  tagsSubscription: Subscription;
 
   ngOnInit() {
     this.path = window.location.pathname.substr(1);
-    this.localStorage.get(`${this.path}/tags`).subscribe(tags => {
-      this.tags = tags;
-    });
+    this.tagsSubscription = this.localStorage
+      .watch(`${this.path}/tags`)
+      .subscribe(tags => {
+        this.tags = tags;
+      });
 
-    this.localStorage.get(`${this.path}/readme`).subscribe(readme => {
-      this.readme = readme;
-    });
-    this.localStorage.get(this.path).subscribe((repo: IRepository) => {
-      this.repoDetails = repo;
-      this.description = this.repoDetails.description;
-      this.isDataLoaded = true;
-    });
+    this.readMeSubscription = this.localStorage
+      .watch(`${this.path}/readme`)
+      .subscribe(readme => {
+        this.readme = readme;
+      });
+    this.repoSubscription = this.localStorage
+      .watch(this.path)
+      .subscribe((repo: IRepository) => {
+        this.repoDetails = repo;
+        this.description = this.repoDetails.description;
+        this.isDataLoaded = true;
+      });
   }
 
   @HostListener("window:beforeunload", ["$event"])
@@ -84,5 +94,11 @@ export class RepoItemDetailsComponent implements OnInit {
 
   toggleReadme() {
     this.showReadme = !this.showReadme;
+  }
+
+  ngOnDestroy() {
+    this.repoSubscription.unsubscribe();
+    this.readMeSubscription.unsubscribe();
+    this.tagsSubscription.unsubscribe();
   }
 }

@@ -60,7 +60,7 @@ export class GithubService {
 
   updateDescription(value, owner, repo) {
     let headers = new HttpHeaders({
-      Authorization: `token 1f0b2582f70842a187661c4216b43aae5dc4893f`
+      Authorization: `token 6b1ccf279fce1331024dd4411e348deb6b2e0121`
     });
 
     return this.http
@@ -71,6 +71,12 @@ export class GithubService {
         },
         { headers }
       )
-      .subscribe(res => console.log(res));
-  } // This API doesn't work
+      .subscribe((update: IRepository) => {
+        this.localStorage.set(update.name, update).subscribe(() => {});
+        const local = this.getUsersRepos();
+        const updateRepoIndex = local.findIndex(repo => repo.id === update.id);
+        local.splice(updateRepoIndex, 1, update);
+        localStorage.setItem("usersRepos", JSON.stringify(local));
+      });
+  }
 }
