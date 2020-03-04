@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from "@angular/core";
 import { IRepository } from "../model/repository.model";
 
-@Pipe({ name: "reposFilter" })
+@Pipe({ name: "reposFilter", pure: false })
 export class ReposFilterPipe implements PipeTransform {
   constructor() {}
 

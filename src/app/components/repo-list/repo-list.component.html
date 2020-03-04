@@ -11,7 +11,7 @@
   <p class="last-update">Last update</p>
   <p class="stars">Stars</p>
   <div class="dropdown-wrapper">
-    <div (click)="sortByDate()" class="button">Sort by</div>
+    <div class="button">Sort by</div>
     <div class="dropdown-options">
       <p
         class="dropdown-option"
@@ -31,7 +31,7 @@
   </div>
 </div>
 <div class="repos-list">
-  <ng-container *ngFor="let repo of usersRepos">
+  <ng-container *ngFor="let repo of usersRepos | reposFilter: filterBy:'name'">
     <app-repo-list-item
       (click)="setDetails(repo)"
       [repository]="repo"
